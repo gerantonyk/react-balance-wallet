@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-import { Token, Currency } from '../types/types';
+import { Token, Currency, Blockchain } from '../types/types';
+import { blockchains } from '../common/const';
 
 type AppContextType = {
   currencies: Currency[];
@@ -14,6 +15,8 @@ type AppContextType = {
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
   latestCurrencySent: Currency | null;
   setLatestCurrencySent: React.Dispatch<React.SetStateAction<Currency | null>>;
+  selectedBlockchain: Blockchain | null;
+  setSelectedBlockchain: React.Dispatch<React.SetStateAction<Blockchain | null>>;
 };
 
 
@@ -27,8 +30,10 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   const [tokens, setTokens] = useState<Token[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [latestCurrencySent, setLatestCurrencySent] = useState<Currency | null>(null);
+  const [selectedBlockchain, setSelectedBlockchain] = useState<Blockchain | null>(blockchains[0]);
+
   return (
-    <AppContext.Provider value={{ latestCurrencySent, setLatestCurrencySent, currencies, setCurrencies, walletAddress, setWalletAddress, selectedCurrency, setSelectedCurrency, tokens, setTokens, isLoading, setIsLoading }}>
+    <AppContext.Provider value={{ selectedBlockchain, setSelectedBlockchain, latestCurrencySent, setLatestCurrencySent, currencies, setCurrencies, walletAddress, setWalletAddress, selectedCurrency, setSelectedCurrency, tokens, setTokens, isLoading, setIsLoading }}>
       {children}
     </AppContext.Provider>
   );

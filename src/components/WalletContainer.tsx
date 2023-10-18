@@ -6,14 +6,19 @@ import WalletInput from './WalletInput';
 import TokensList from './TokensList';
 import { CircularProgress, Typography } from '@mui/material';
 import { useAppContext } from '../context/AppContext';
+import BlockchainAutocomplete from './BlockchainAutocomplete';
+
+
 
 const WalletContainer: FC = () => {
   const { isLoading } = useAppContext()
+
   return (
     <>
       <CssBaseline />
       <Container maxWidth="sm">
-        <Box sx={{ bgcolor: '#cfe8fc', height: '100%' }}>
+        <Box sx={{ bgcolor: '#cfe8fc', height: '100v', minHeight: '100vh' }}>
+          <BlockchainAutocomplete />
           <Typography variant="h3" align="center" sx={{ paddingTop: '20px', marginBottom: '30px' }}>
             Wallet Balance
           </Typography>

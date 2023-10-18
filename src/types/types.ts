@@ -13,3 +13,9 @@ export interface Currency {
   name: string;
   symbol: string;
 }
+
+export interface Blockchain {
+  name: string;
+  code: string;
+  blockExplorerUrl?: string;
+}
