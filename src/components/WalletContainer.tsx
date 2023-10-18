@@ -4,13 +4,8 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import WalletInput from './WalletInput';
 import TokensList from './TokensList';
-import { useAppContext } from '../context/AppContext';
 
 const WalletContainer: FC = () => {
-  const { tokens } = useAppContext();
-
-
-
 
   return (
     <>
@@ -19,7 +14,7 @@ const WalletContainer: FC = () => {
         <Box sx={{ bgcolor: '#cfe8fc', height: '100vh' }}>
           <WalletInput
           />
-          {tokens ? <TokensList tokens={tokens} /> : <></>}
+          <TokensList />
         </Box>
       </Container>
     </>

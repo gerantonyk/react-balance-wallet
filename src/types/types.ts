@@ -3,6 +3,7 @@ export interface Token {
   thumbnail: string;
   balanceUsd: string;
   balance: string;
+  balanceReferenceToken: string;
 }
 
 export interface Currency {

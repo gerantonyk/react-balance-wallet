@@ -8,9 +8,10 @@ import CurrencyAutocomplete from './CurrencyAutocomplete';
 const WalletInput: FC<{
 }> = () => {
 
-  const { setTokens, walletAddress, setWalletAddress } = useAppContext();
+  const { selectedCurrency, setTokens, walletAddress, setWalletAddress } = useAppContext();
   const handleGetTokensClick = () => {
-    fetch(`http://localhost:3001/tokens?walletAddress=${walletAddress}`)
+    const queryParameters = selectedCurrency?.address ? `&contractAddress=${selectedCurrency.address}` : '';
+    fetch(`http://localhost:3001/tokens?walletAddress=${walletAddress}${queryParameters}`)
       .then((response) => response.json())
       .then((data) => {
         console.log(data.tokens)
