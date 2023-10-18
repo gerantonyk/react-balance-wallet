@@ -27,13 +27,10 @@ const WalletInput: FC<{
   };
   const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
   const startTimer = () => {
-    console.log('se ejeu')
     if (intervalId) {
-      console.log('detuvo')
       clearInterval(intervalId);
       setIntervalId(null);
     }
-    console.log('inicia')
     const newIntervalId = setInterval(() => {
       handleGetTokensClick()
     }, 10000);
@@ -43,7 +40,6 @@ const WalletInput: FC<{
   };
   useEffect(() => {
     return () => {
-      // Limpiar el intervalo cuando el componente se desmonta
       if (intervalId) {
         clearInterval(intervalId);
       }

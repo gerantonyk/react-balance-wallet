@@ -7,6 +7,10 @@ import { useAppContext } from '../context/AppContext';
 const TokensList: FC = () => {
   const { tokens, latestCurrencySent } = useAppContext()
 
+  const handleClick = (param: string) => {
+    const extraUrl = param ? `address/${param}` : ''
+    window.open('https://etherscan.io/' + extraUrl, '_blank');
+  };
 
   return (
     tokens.length > 0 ? (
@@ -25,6 +29,7 @@ const TokensList: FC = () => {
                   )}
                   label={token.tokenName}
                   clickable
+                  onClick={() => handleClick(token?.contractAddress || '')}
                   variant="outlined"
                   color="primary"
                 />

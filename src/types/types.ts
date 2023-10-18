@@ -5,6 +5,7 @@ export interface Token {
   balance: string;
   balanceReferenceToken: string;
   tokenSymbol: string;
+  contractAddress?: string;
 }
 
 export interface Currency {
