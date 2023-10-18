@@ -4,32 +4,29 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import WalletInput from './WalletInput';
 import TokensList from './TokensList';
+import { Token } from '../types/token';
 
 const WalletContainer: FC = () => {
   const [walletAddress, setWalletAddress] = useState('');
-  const [tokens, setTokens] = useState([]);
+  const [tokens, setTokens] = useState<Array<Token>>([]);
 
   const handleWalletAddressChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setWalletAddress(event.target.value);
   };
 
   const handleGetTokensClick = () => {
-    // Realizar una solicitud fetch aquí
-    // Por ejemplo:
     fetch(`http://localhost:3001/tokens?walletAddress=${walletAddress}`)
       .then((response) => response.json())
       .then((data) => {
-        // Actualizar el estado del saldo con la respuesta del servidor
-        console.log('asi viene', data);
         setTokens(data.tokens);
       })
       .catch((error) => {
-        console.error('Error al obtener el saldo:', error);
+        console.error('Error getting balance', error);
       });
   };
 
   return (
-    <React.Fragment>
+    <>
       <CssBaseline />
       <Container maxWidth="sm">
         <Box sx={{ bgcolor: '#cfe8fc', height: '100vh' }}>
@@ -38,10 +35,10 @@ const WalletContainer: FC = () => {
             handleWalletAddressChange={handleWalletAddressChange}
             handleGetTokensClick={handleGetTokensClick}
           />
-          <TokensList tokens={tokens} />
+          {tokens ? <TokensList tokens={tokens} /> : <></>}
         </Box>
       </Container>
-    </React.Fragment>
+    </>
   );
 };
 
