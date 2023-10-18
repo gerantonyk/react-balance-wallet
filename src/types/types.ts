@@ -4,6 +4,7 @@ export interface Token {
   balanceUsd: string;
   balance: string;
   balanceReferenceToken: string;
+  tokenSymbol: string;
 }
 
 export interface Currency {

@@ -20,7 +20,6 @@ const CurrencyAutocomplete: FC = () => {
           }
         });
         setCurrencies(uniqueCurrencies);
-        console.log(uniqueCurrencies)
       })
       .catch((error) => {
         console.error('Error getting currencies', error);
