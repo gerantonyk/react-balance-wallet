@@ -1,3 +1,20 @@
+# About the app
+
+Is a simple app that shows, for a given wallet, the balance of tokens and cryptocurrencies. The user can select the currency against which they want to view the balance of each token or cryptocurrency.
+
+In addition to the minimum requirements, there are some added features:
+
+Each token chip includes a link to its smart contract on the specific blockchain.
+The feed updates every 20 seconds after the 'Get Balance' button is pressed.
+This repository and its backend are deployed on Render and Vercel.
+The app is multi-chain, currently supporting Ethereum Mainnet, Polygon, and Binance Smart Chain.
+
+# How to run the repo:
+
+Clone the repo, install dependencies:
+
+### `npm install`
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
