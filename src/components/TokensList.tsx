@@ -5,10 +5,10 @@ import MonetizationOnRoundedIcon from '@mui/icons-material/MonetizationOnRounded
 
 import { useAppContext } from '../context/AppContext';
 const TokensList: FC = () => {
-  const { tokens, latestCurrencySent, selectedBlockchain } = useAppContext()
+  const { tokens, selectedBlockchain } = useAppContext()
 
   const handleClick = (param: string) => {
-    window.open(param, '_blank');
+    window.open(param);
   };
 
   return (
@@ -28,13 +28,13 @@ const TokensList: FC = () => {
                   )}
                   label={token.tokenName}
                   clickable
-                  onClick={() => handleClick(selectedBlockchain.blockExplorerUrl + token?.contractAddress ? `address/${token?.contractAddress}` : '')}
+                  onClick={() => handleClick(selectedBlockchain.blockExplorerUrl + (token?.contractAddress ? `/address/${token?.contractAddress}` : ''))}
                   variant="outlined"
                   color="primary"
                 />
               </div>
               <div>
-                <strong>{Number(token.balanceReferenceToken).toFixed(5)} {latestCurrencySent?.symbol || 'ETH'} </strong>
+                <strong>{Number(token.balanceReferenceToken).toFixed(5)} {token?.currency} </strong>
               </div>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginLeft: '25px', marginRight: '30px' }}>

@@ -14,8 +14,7 @@ const CurrencyAutocomplete: FC = () => {
       .then((data) => {
         const uniqueCurrencies: Array<Currency> = [];
         const seenSymbols = new Set();
-        const defaultCurrency = selectedBlockchain ? { symbol: selectedBlockchain.tokenSymbol, name: selectedBlockchain.tokenName, address: '' }
-          : { symbol: 'ETH', name: 'Ethereum', address: '' };
+        const defaultCurrency = { symbol: selectedBlockchain.tokenSymbol, name: selectedBlockchain.tokenName, address: '' }
         seenSymbols.add(defaultCurrency.symbol + defaultCurrency.name);
         uniqueCurrencies.push(defaultCurrency);
         const returnedCurrencies: Array<Currency> = data.currencies
@@ -39,7 +38,7 @@ const CurrencyAutocomplete: FC = () => {
       defaultValue={currencies[0]}
       value={selectedCurrency}
       onChange={(_, newValue) => setSelectedCurrency(newValue || currencies[0])}
-      renderInput={(params) => <TextField {...params} label="Select Currency" sx={{ marginLeft: '8px', marginTop: '8px', maxWidth: '400px' }} />}
+      renderInput={(params) => <TextField {...params} label="Select Currency" sx={{ marginLeft: '8px', marginTop: '8px', maxWidth: '410px' }} />}
     />
   );
 };

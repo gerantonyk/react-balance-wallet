@@ -3,12 +3,13 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useAppContext } from '../context/AppContext';
 import CurrencyAutocomplete from './CurrencyAutocomplete';
+import { Token } from '../types/types';
 
 
 const WalletInput: FC<{
 }> = () => {
 
-  const { selectedBlockchain, setLatestCurrencySent, setIsLoading, selectedCurrency, setTokens, walletAddress, setWalletAddress } = useAppContext();
+  const { selectedBlockchain, setIsLoading, selectedCurrency, setTokens, walletAddress, setWalletAddress } = useAppContext();
   const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
   let error = false
   const handleGetTokensClick = async () => {
@@ -19,19 +20,25 @@ const WalletInput: FC<{
       const response = await fetch(`http://localhost:3001/tokens?walletAddress=${walletAddress}${queryParameters}`);
 
       if (!response.ok) {
-        alert('Invalid address');
+        if (response.status === 429) alert('too many requests');
+        if (response.status === 400) alert('Invalid address');
         console.error('Error getting balance');
-        console.log('salgo por aca', error)
         error = true
         setTokens([]);
         return;
       }
       error = false
       const data = await response.json();
-      setLatestCurrencySent(selectedCurrency);
-      setTokens(data.tokens);
+      if (data.tokens.length > 0) {
+        const updatedTokens = data.tokens.map((token: Token) => ({
+          ...token,
+          currency: selectedCurrency?.symbol || selectedBlockchain.tokenSymbol,
+        }));
+
+        setTokens(updatedTokens);
+      }
     } catch (error) {
-      alert('Invalid address');
+      alert('Error getting balance');
       console.error('Error getting balance', error);
     } finally {
       setIsLoading(false);
@@ -43,7 +50,6 @@ const WalletInput: FC<{
   };
 
   const startTimer = () => {
-    console.log('pasti', error)
     if (intervalId) {
       clearInterval(intervalId);
       setIntervalId(null);
@@ -52,7 +58,7 @@ const WalletInput: FC<{
     if (!error) {
       const newIntervalId = setInterval(() => {
         handleGetTokensClick()
-      }, 5000);
+      }, 20000);
 
       setIntervalId(newIntervalId);
     }
@@ -74,7 +80,7 @@ const WalletInput: FC<{
         variant="outlined"
         value={walletAddress}
         onChange={handleWalletAddressChange}
-        sx={{ marginLeft: '8px', marginTop: '8px' }}
+        sx={{ marginLeft: '8px', marginTop: '8px', width: '410px' }}
       />
       <CurrencyAutocomplete />
       <Button
