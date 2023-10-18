@@ -54,7 +54,7 @@ const WalletInput: FC<{
       clearInterval(intervalId);
       setIntervalId(null);
     }
-    console.log(error)
+
     if (!error) {
       const newIntervalId = setInterval(() => {
         handleGetTokensClick()
