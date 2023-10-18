@@ -9,7 +9,7 @@ const CurrencyAutocomplete: FC = () => {
   useEffect(() => {
 
     let queryParameters = `?blockchain=${selectedBlockchain.code}`;
-    fetch(`http://localhost:3001/currencies${queryParameters}`)
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/currencies${queryParameters}`)
       .then((response) => response.json())
       .then((data) => {
         const uniqueCurrencies: Array<Currency> = [];

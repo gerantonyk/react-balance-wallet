@@ -17,7 +17,7 @@ const WalletInput: FC<{
     queryParameters += `&blockchain=${selectedBlockchain.code}`;
 
     try {
-      const response = await fetch(`http://localhost:3001/tokens?walletAddress=${walletAddress}${queryParameters}`);
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/tokens?walletAddress=${walletAddress}${queryParameters}`);
 
       if (!response.ok) {
         if (response.status === 429) alert('too many requests');
