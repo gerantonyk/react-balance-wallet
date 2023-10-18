@@ -5,11 +5,11 @@ import MonetizationOnRoundedIcon from '@mui/icons-material/MonetizationOnRounded
 
 import { useAppContext } from '../context/AppContext';
 const TokensList: FC = () => {
-  const { tokens, latestCurrencySent } = useAppContext()
+  const { tokens, latestCurrencySent, selectedBlockchain } = useAppContext()
 
   const handleClick = (param: string) => {
     const extraUrl = param ? `address/${param}` : ''
-    window.open('https://etherscan.io/' + extraUrl, '_blank');
+    window.open(param, '_blank');
   };
 
   return (
@@ -29,7 +29,7 @@ const TokensList: FC = () => {
                   )}
                   label={token.tokenName}
                   clickable
-                  onClick={() => handleClick(token?.contractAddress || '')}
+                  onClick={() => handleClick(selectedBlockchain.blockExplorerUrl + token?.contractAddress ? `address/${token?.contractAddress}` : '')}
                   variant="outlined"
                   color="primary"
                 />

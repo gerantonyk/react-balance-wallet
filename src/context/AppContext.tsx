@@ -15,8 +15,8 @@ type AppContextType = {
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
   latestCurrencySent: Currency | null;
   setLatestCurrencySent: React.Dispatch<React.SetStateAction<Currency | null>>;
-  selectedBlockchain: Blockchain | null;
-  setSelectedBlockchain: React.Dispatch<React.SetStateAction<Blockchain | null>>;
+  selectedBlockchain: Blockchain;
+  setSelectedBlockchain: React.Dispatch<React.SetStateAction<Blockchain>>;
 };
 
 
@@ -30,7 +30,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   const [tokens, setTokens] = useState<Token[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [latestCurrencySent, setLatestCurrencySent] = useState<Currency | null>(null);
-  const [selectedBlockchain, setSelectedBlockchain] = useState<Blockchain | null>(blockchains[0]);
+  const [selectedBlockchain, setSelectedBlockchain] = useState<Blockchain>(blockchains[0]);
 
   return (
     <AppContext.Provider value={{ selectedBlockchain, setSelectedBlockchain, latestCurrencySent, setLatestCurrencySent, currencies, setCurrencies, walletAddress, setWalletAddress, selectedCurrency, setSelectedCurrency, tokens, setTokens, isLoading, setIsLoading }}>

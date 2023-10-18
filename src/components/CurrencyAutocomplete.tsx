@@ -4,15 +4,18 @@ import { Autocomplete } from '@mui/material';
 import { useAppContext } from '../context/AppContext';
 import { Currency } from '../types/types';
 const CurrencyAutocomplete: FC = () => {
-  const { currencies, selectedCurrency, setSelectedCurrency, setCurrencies } = useAppContext();
+  const { selectedBlockchain, currencies, selectedCurrency, setSelectedCurrency, setCurrencies } = useAppContext();
 
   useEffect(() => {
-    fetch(`http://localhost:3001/currencies`)
+
+    let queryParameters = `?blockchain=${selectedBlockchain.code}`;
+    fetch(`http://localhost:3001/currencies${queryParameters}`)
       .then((response) => response.json())
       .then((data) => {
         const uniqueCurrencies: Array<Currency> = [];
         const seenSymbols = new Set();
-        const defaultCurrency = { symbol: 'ETH', name: 'Ethereum', address: '' };
+        const defaultCurrency = selectedBlockchain ? { symbol: selectedBlockchain.tokenSymbol, name: selectedBlockchain.tokenName, address: '' }
+          : { symbol: 'ETH', name: 'Ethereum', address: '' };
         seenSymbols.add(defaultCurrency.symbol + defaultCurrency.name);
         uniqueCurrencies.push(defaultCurrency);
         const returnedCurrencies: Array<Currency> = data.currencies
@@ -27,7 +30,7 @@ const CurrencyAutocomplete: FC = () => {
       .catch((error) => {
         console.error('Error getting currencies', error);
       });
-  }, [setCurrencies]);
+  }, [setCurrencies, selectedBlockchain]);
 
   return (
     <Autocomplete
