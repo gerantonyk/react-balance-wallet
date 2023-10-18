@@ -3,7 +3,9 @@ import WalletContainer from './components/WalletContainer';
 import './App.css';
 function App() {
 
-  return <WalletContainer></WalletContainer>
+  return <>
+    <WalletContainer></WalletContainer>
+  </>
 }
 
 export default App;

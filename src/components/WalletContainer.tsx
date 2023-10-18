@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import WalletInput from './WalletInput';
 import TokensList from './TokensList';
-import { Token } from '../types/token';
+import { Token } from '../types/types';
 
 const WalletContainer: FC = () => {
   const [walletAddress, setWalletAddress] = useState('');
@@ -18,6 +18,7 @@ const WalletContainer: FC = () => {
     fetch(`http://localhost:3001/tokens?walletAddress=${walletAddress}`)
       .then((response) => response.json())
       .then((data) => {
+        console.log(data.tokens)
         setTokens(data.tokens);
       })
       .catch((error) => {

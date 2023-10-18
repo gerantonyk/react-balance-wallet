@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import Chip from '@mui/material/Chip';
 import Avatar from '@mui/material/Avatar';
 import MonetizationOnRoundedIcon from '@mui/icons-material/MonetizationOnRounded';
-import { Token } from '../types/token';
+import { Token } from '../types/types';
 const TokensList: FC<{ tokens: Array<Token> }> = ({ tokens }) => {
   return (
     <div>
