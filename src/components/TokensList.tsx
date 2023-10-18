@@ -5,8 +5,9 @@ import MonetizationOnRoundedIcon from '@mui/icons-material/MonetizationOnRounded
 
 import { useAppContext } from '../context/AppContext';
 const TokensList: FC = () => {
+  const { tokens, latestCurrencySent } = useAppContext()
 
-  const { tokens, selectedCurrency } = useAppContext()
+
   return (
     tokens.length > 0 ? (
       <div style={{ marginTop: '16px' }}>
@@ -29,7 +30,7 @@ const TokensList: FC = () => {
                 />
               </div>
               <div>
-                <strong>{Number(token.balanceReferenceToken).toFixed(5)} {selectedCurrency?.symbol || 'ETH'} </strong>
+                <strong>{Number(token.balanceReferenceToken).toFixed(5)} {latestCurrencySent?.symbol || 'ETH'} </strong>
               </div>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginLeft: '30px', marginRight: '30px' }}>

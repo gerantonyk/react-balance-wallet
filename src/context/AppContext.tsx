@@ -12,6 +12,8 @@ type AppContextType = {
   setTokens: React.Dispatch<React.SetStateAction<Token[]>>;
   isLoading: boolean;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  latestCurrencySent: Currency | null;
+  setLatestCurrencySent: React.Dispatch<React.SetStateAction<Currency | null>>;
 };
 
 
@@ -24,8 +26,9 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   const [selectedCurrency, setSelectedCurrency] = useState<Currency | null>(null);
   const [tokens, setTokens] = useState<Token[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [latestCurrencySent, setLatestCurrencySent] = useState<Currency | null>(null);
   return (
-    <AppContext.Provider value={{ currencies, setCurrencies, walletAddress, setWalletAddress, selectedCurrency, setSelectedCurrency, tokens, setTokens, isLoading, setIsLoading }}>
+    <AppContext.Provider value={{ latestCurrencySent, setLatestCurrencySent, currencies, setCurrencies, walletAddress, setWalletAddress, selectedCurrency, setSelectedCurrency, tokens, setTokens, isLoading, setIsLoading }}>
       {children}
     </AppContext.Provider>
   );
