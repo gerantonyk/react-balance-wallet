@@ -8,7 +8,7 @@ export const blockchains = [
   },
   {
     name: 'Polygon',
-    code: 'pol',
+    code: 'polygon',
     blockExplorerUrl: 'https://polygonscan.com',
     tokenSymbol: 'MATIC',
     tokenName: 'Matic',

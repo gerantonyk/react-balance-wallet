@@ -8,7 +8,6 @@ const TokensList: FC = () => {
   const { tokens, latestCurrencySent, selectedBlockchain } = useAppContext()
 
   const handleClick = (param: string) => {
-    const extraUrl = param ? `address/${param}` : ''
     window.open(param, '_blank');
   };
 
