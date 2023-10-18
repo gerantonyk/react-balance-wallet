@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useAppContext } from '../context/AppContext';
@@ -10,7 +10,6 @@ const WalletInput: FC<{
 
   const { setLatestCurrencySent, setIsLoading, selectedCurrency, setTokens, walletAddress, setWalletAddress } = useAppContext();
   const handleGetTokensClick = () => {
-    setIsLoading(true)
     const queryParameters = selectedCurrency?.address ? `&contractAddress=${selectedCurrency.address}` : '';
     fetch(`http://localhost:3001/tokens?walletAddress=${walletAddress}${queryParameters}`)
       .then((response) => response.json())
@@ -26,7 +25,30 @@ const WalletInput: FC<{
   const handleWalletAddressChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setWalletAddress(event.target.value);
   };
+  const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
+  const startTimer = () => {
+    console.log('se ejeu')
+    if (intervalId) {
+      console.log('detuvo')
+      clearInterval(intervalId);
+      setIntervalId(null);
+    }
+    console.log('inicia')
+    const newIntervalId = setInterval(() => {
+      handleGetTokensClick()
+    }, 10000);
 
+    setIntervalId(newIntervalId);
+
+  };
+  useEffect(() => {
+    return () => {
+      // Limpiar el intervalo cuando el componente se desmonta
+      if (intervalId) {
+        clearInterval(intervalId);
+      }
+    };
+  }, [intervalId]);
 
   return (
     <div>
@@ -41,7 +63,11 @@ const WalletInput: FC<{
       <CurrencyAutocomplete />
       <Button
         variant="contained"
-        onClick={handleGetTokensClick}
+        onClick={() => {
+          setIsLoading(true)
+          handleGetTokensClick();
+          startTimer(); // Iniciar el temporizador
+        }}
         sx={{ display: 'block', margin: '0 auto', marginTop: '20px' }}
       >
         Get Balance
