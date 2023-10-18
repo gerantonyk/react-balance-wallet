@@ -17,6 +17,7 @@ const WalletInput: FC<{
         setTokens(data.tokens);
       })
       .catch((error) => {
+        alert('invalid address')
         console.error('Error getting balance', error);
       });
   };
@@ -33,12 +34,16 @@ const WalletInput: FC<{
         variant="outlined"
         value={walletAddress}
         onChange={handleWalletAddressChange}
+        sx={{ marginLeft: '8px', marginTop: '8px' }}
       />
-      <Button variant="contained" onClick={handleGetTokensClick}>
+      <CurrencyAutocomplete />
+      <Button
+        variant="contained"
+        onClick={handleGetTokensClick}
+        sx={{ display: 'block', margin: '0 auto', marginTop: '8px' }}
+      >
         Get Balance
       </Button>
-
-      <CurrencyAutocomplete />
     </div>
   );
 };

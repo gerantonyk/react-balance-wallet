@@ -12,7 +12,6 @@ const WalletContainer: FC = () => {
 
 
 
-
   return (
     <>
       <CssBaseline />

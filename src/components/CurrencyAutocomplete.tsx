@@ -33,7 +33,7 @@ const CurrencyAutocomplete: FC = () => {
       getOptionLabel={(option) => `${option.symbol} ${option.name}`}
       value={selectedCurrency}
       onChange={(_, newValue) => setSelectedCurrency(newValue)}
-      renderInput={(params) => <TextField {...params} label="Select Currency" />}
+      renderInput={(params) => <TextField {...params} label="Select Currency" sx={{ marginLeft: '8px', marginTop: '8px', maxWidth: '400px' }} />}
     />
   );
 };
