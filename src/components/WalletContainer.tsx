@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import WalletInput from './WalletInput';
 import TokensList from './TokensList';
-import { CircularProgress } from '@mui/material';
+import { CircularProgress, Typography } from '@mui/material';
 import { useAppContext } from '../context/AppContext';
 
 const WalletContainer: FC = () => {
@@ -13,7 +13,10 @@ const WalletContainer: FC = () => {
     <>
       <CssBaseline />
       <Container maxWidth="sm">
-        <Box sx={{ bgcolor: '#cfe8fc', height: '100vh' }}>
+        <Box sx={{ bgcolor: '#cfe8fc', height: '100%' }}>
+          <Typography variant="h3" align="center" sx={{ paddingTop: '20px', marginBottom: '30px' }}>
+            Wallet Balance
+          </Typography>
           <WalletInput
           />
           {isLoading ?

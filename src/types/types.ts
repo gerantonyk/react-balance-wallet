@@ -11,7 +11,5 @@ export interface Token {
 export interface Currency {
   address?: string;
   name: string;
-  decimals: number;
   symbol: string;
-  thumbnail: string;
 }

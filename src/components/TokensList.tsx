@@ -38,7 +38,7 @@ const TokensList: FC = () => {
                 <strong>{Number(token.balanceReferenceToken).toFixed(5)} {latestCurrencySent?.symbol || 'ETH'} </strong>
               </div>
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginLeft: '30px', marginRight: '30px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginLeft: '25px', marginRight: '30px' }}>
               <div>
                 <span>{Number(token.balance).toFixed(5)} {token.tokenSymbol}</span>
               </div>

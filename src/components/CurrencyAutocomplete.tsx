@@ -12,11 +12,14 @@ const CurrencyAutocomplete: FC = () => {
       .then((data) => {
         const uniqueCurrencies: Array<Currency> = [];
         const seenSymbols = new Set();
+        const defaultCurrency = { symbol: 'ETH', name: 'Ethereum', address: '' };
+        seenSymbols.add(defaultCurrency.symbol + defaultCurrency.name);
+        uniqueCurrencies.push(defaultCurrency);
         const returnedCurrencies: Array<Currency> = data.currencies
         returnedCurrencies.forEach((currency) => {
           if (!seenSymbols.has(currency.symbol + currency.name)) {
-            seenSymbols.add(currency.symbol + currency.name); // Agregamos el símbolo al Set para marcarlo como "visto".
-            uniqueCurrencies.push(currency);   // Agregamos la moneda a la lista de monedas únicas.
+            seenSymbols.add(currency.symbol + currency.name);
+            uniqueCurrencies.push(currency);
           }
         });
         setCurrencies(uniqueCurrencies);
